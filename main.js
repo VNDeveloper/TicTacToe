@@ -1,6 +1,10 @@
 var origBoard;
-const huPlayer = "O";
-const aiPlayer = "X";
+var huPlayer = "O";
+var aiPlayer = "X";
+var currentTurn;
+var checkOBtn = document.getElementById("choiceO");
+var checkXBtn = document.getElementById("choiceX");
+
 const winCombos = [
   [0, 1, 2],
   [3, 4, 5],
@@ -11,11 +15,23 @@ const winCombos = [
   [0, 4, 8],
   [6, 4, 2]
 ];
-
 const cells = document.querySelectorAll(".cell");
 startGame();
 
+function selectOption(current){
+  if(current.value === "O"){
+    huPlayer = "O";
+    aiPlayer = "X";
+  }else if(current.value === "X"){
+    huPlayer = "X";
+    aiPlayer = "O";
+  }
+}
+
 function startGame() {
+  checkOBtn.disabled = false;
+  checkXBtn.disabled = false;
+  
   document.querySelector(".endgame").style.display = "none";
   origBoard = Array.from(Array(9).keys());
   for (var i = 0; i < cells.length; i++) {
@@ -26,9 +42,21 @@ function startGame() {
 }
 
 function turnClick(square) {
+  if(checkOBtn.checked == true){
+    checkXBtn.disabled = true;
+  }else if(checkXBtn.checked == true) {
+    checkOBtn.disabled = true;
+  }
+
   if (typeof origBoard[square.target.id] == "number") {
-    turn(square.target.id, huPlayer);
-    if (!checkTie()) turn(bestSpot(), aiPlayer);
+    if(checkXBtn.checked == true){
+      if (!checkTie()) turn(bestSpot(), aiPlayer);
+      turn(square.target.id, huPlayer);
+    }else {
+      if (!checkTie()) turn(emptySquares()[0], aiPlayer);
+      turn(square.target.id, huPlayer);
+      if (!checkTie()) turn(bestSpot(), aiPlayer);
+    }
   }
 }
 
