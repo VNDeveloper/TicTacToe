@@ -1,6 +1,6 @@
 var origBoard;
-var huPlayer = "O";
-var aiPlayer = "X";
+var huPlayer = "X";
+var aiPlayer = "O";
 var currentTurn;
 var checkOBtn = document.getElementById("choiceO");
 var checkXBtn = document.getElementById("choiceX");
@@ -18,45 +18,47 @@ const winCombos = [
 const cells = document.querySelectorAll(".cell");
 startGame();
 
-function selectOption(current){
-  if(current.value === "O"){
-    huPlayer = "O";
-    aiPlayer = "X";
-  }else if(current.value === "X"){
+function selectOption(current) {
+  console.log(current);
+  if (current.value === "X") {
     huPlayer = "X";
     aiPlayer = "O";
+  } else if (current.value === "O") {
+    huPlayer = "O";
+    aiPlayer = "X";
+    turn(emptySquares()[firstMove()], aiPlayer);
   }
 }
 
+function firstMove() {
+  return Math.floor(Math.random() * 9) + 1;
+}
 function startGame() {
   checkOBtn.disabled = false;
   checkXBtn.disabled = false;
-  
-  document.querySelector(".endgame").style.display = "none";
   origBoard = Array.from(Array(9).keys());
+  document.querySelector(".endgame").style.display = "none";
+
   for (var i = 0; i < cells.length; i++) {
     cells[i].innerText = "";
     cells[i].style.removeProperty("background-color");
     cells[i].addEventListener("click", turnClick, false);
   }
+  if (checkOBtn.checked == true) {
+    turn(emptySquares()[firstMove()], aiPlayer);
+  }
 }
 
 function turnClick(square) {
-  if(checkOBtn.checked == true){
+  if (checkOBtn.checked == true) {
     checkXBtn.disabled = true;
-  }else if(checkXBtn.checked == true) {
+  } else if (checkXBtn.checked == true) {
     checkOBtn.disabled = true;
   }
 
   if (typeof origBoard[square.target.id] == "number") {
-    if(checkXBtn.checked == true){
-      if (!checkTie()) turn(bestSpot(), aiPlayer);
-      turn(square.target.id, huPlayer);
-    }else {
-      if (!checkTie()) turn(emptySquares()[0], aiPlayer);
-      turn(square.target.id, huPlayer);
-      if (!checkTie()) turn(bestSpot(), aiPlayer);
-    }
+    turn(square.target.id, huPlayer);
+    if (!checkTie()) turn(bestSpot(), aiPlayer);
   }
 }
 
@@ -113,6 +115,7 @@ function checkTie() {
 function declareWinner(who) {
   document.querySelector(".endgame").style.display = "block";
   document.querySelector(".endgame .text").innerHTML = who;
+  checkXBtn.checked = true;
 }
 
 function minimax(newBoard, player) {
