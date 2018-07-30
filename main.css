@@ -1,9 +1,11 @@
 body {
-  padding: 0;
   font-family: "Comic Sans MS", cursive;
+  background-color: #f1faee;
+  position: fixed;
+  margin: 0;
 }
 td {
-  border: 0.3rem solid #333;
+  border: 0.3rem solid white;
   height: 100px;
   width: 100px;
   text-align: center;
@@ -14,26 +16,33 @@ td {
 }
 
 .container {
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .title {
-  font-size: 30px;
+  font-size: 2.2rem;
   margin-bottom: 30px;
   text-align: center;
 }
 
 .gameContent {
   width: 600px;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
+  padding-top: 1.7rem;
+  padding-bottom: 1.7rem;
+  background-color: #1d3557;
+  display: flex;
+  align-items: center;
 }
 
 table {
   border-collapse: collapse;
   margin: 0 auto;
+  color: white;
 }
 
 table tr:first-child td {
@@ -56,10 +65,11 @@ button {
   font-size: 1.5rem;
   width: 600px;
   display: inline-block;
-  line-height: 40px;
+  line-height: 3rem;
   text-align: center;
-  margin-top: 1rem;
   border: 0;
+  color: #e63946;
+  font-weight: 600;
 }
 
 .endgame {
@@ -71,4 +81,35 @@ button {
 .rule {
   font-size: 1rem;
   font-style: italic;
+}
+
+.box {
+  width: 180px;
+  height: 50px;
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"] {
+  margin-right: 1rem;
+}
+
+input[type="radio"]:checked + .box {
+  background-color: #e63946;
+  color: white;
+}
+
+.userChoice {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
 }

@@ -116,6 +116,8 @@ function declareWinner(who) {
   document.querySelector(".endgame").style.display = "block";
   document.querySelector(".endgame .text").innerHTML = who;
   checkXBtn.checked = true;
+  huPlayer = "X";
+  aiPlayer = "O";
 }
 
 function minimax(newBoard, player) {

@@ -5,22 +5,27 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 </head>
 
 <body>
     <div class="container">
-        <span class="title">TicTacToe Game
-            <br>
-            <span class="rule"> you are "0" </span>
-        </span>
+        <span class="title">TicTacToe Game</span>
 
         <div class="userChoice">
-            <input type="radio" id="choiceX" onclick="selectOption(this)" name="choices" value="X" checked>
-            <label for="choiceX">X</label>
-            <input type="radio" id="choiceO" onclick="selectOption(this)" name="choices" value="O">
-            <label for="choiceO">O</label>
+            <label>
+                <input type="radio" id="choiceX" onclick="selectOption(this)" name="choices" value="X" checked>
+                <div class="box">
+                    <span>X</span>
+                </div>
+            </label>
+            <label>
+                <input type="radio" id="choiceO" onclick="selectOption(this)" name="choices" value="O">
+                <div class="box">
+                    <span>O</span>
+                </div>
+            </label>
         </div>
 
         <div class="gameContent">
