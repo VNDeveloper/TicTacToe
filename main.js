@@ -37,6 +37,8 @@ function startGame() {
   checkOBtn.disabled = false;
   checkXBtn.disabled = false;
   origBoard = Array.from(Array(9).keys());
+  document.getElementById('endContainer').classList.remove('fade-in'); 
+  document.getElementById('gameTable').classList.remove('fade-out'); 
   document.querySelector(".endgame").style.display = "none";
 
   for (var i = 0; i < cells.length; i++) {
@@ -89,7 +91,10 @@ function gameOver(gameWon) {
   for (var i = 0; i < cells.length; i++) {
     cells[i].removeEventListener("click", turnClick, false);
   }
-  declareWinner(gameWon.player == huPlayer ? "You win!" : "You lose!");
+  setTimeout( function() {
+    declareWinner(gameWon.player == huPlayer ? "You win!" : "You lose!") 
+  }, 2000);
+
 }
 
 function emptySquares() {
@@ -106,19 +111,25 @@ function checkTie() {
       cells[i].style.backgroundColor = "green";
       cells[i].removeEventListener("click", turnClick, false);
     }
-    declareWinner("Tie Game!");
+    setTimeout(function() {
+      declareWinner("Tie Game!")
+    }, 1000);
     return true;
   }
   return false;
 }
 
 function declareWinner(who) {
+  document.getElementById('gameTable').className += ' fade-out'; 
   document.querySelector(".endgame").style.display = "block";
   document.querySelector(".endgame .text").innerHTML = who;
+  document.getElementById('endContainer').className += ' fade-in'; 
+
   checkXBtn.checked = true;
   huPlayer = "X";
   aiPlayer = "O";
 }
+
 
 function minimax(newBoard, player) {
   var availSpots = emptySquares();

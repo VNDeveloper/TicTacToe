@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Tic Tac Toe Game</title>
     <meta name="viewport" content="initial-scale=1.0, width=device-width">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 </head>
@@ -29,7 +29,7 @@
         </div>
 
         <div class="gameContent">
-            <table>
+            <table id="gameTable">
                 <tr>
                     <td class="cell" id="0"></td>
                     <td class="cell" id="1"></td>
@@ -46,9 +46,9 @@
                     <td class="cell" id="8"></td>
                 </tr>
             </table>
-        </div>
-        <div class="endgame">
-            <span class="text"></span>
+            <div id="endContainer" class="endgame">
+                <span class="text"></span>
+            </div>
         </div>
         <button onclick="startGame()">Replay</button>
     </div>
