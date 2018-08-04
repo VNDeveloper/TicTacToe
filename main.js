@@ -27,11 +27,13 @@ function selectOption(current) {
     huPlayer = "O";
     aiPlayer = "X";
     turn(emptySquares()[firstMove()], aiPlayer);
+    checkXBtn.disabled = true;
   }
 }
 
 function firstMove() {
-  return Math.floor(Math.random() * 9) + 1;
+  checkOBtn.disabled = true;
+  return Math.floor(Math.random() * 9) + 1;s
 }
 function startGame() {
   checkOBtn.disabled = false;
@@ -48,6 +50,7 @@ function startGame() {
   }
   if (checkOBtn.checked == true) {
     turn(emptySquares()[firstMove()], aiPlayer);
+    checkOBtn.disabled = true;
   }
 }
 
@@ -86,14 +89,14 @@ function checkWin(board, player) {
 function gameOver(gameWon) {
   for (let index of winCombos[gameWon.index]) {
     document.getElementById(index).style.backgroundColor =
-      gameWon.player == huPlayer ? "blue" : "red";
+      gameWon.player == huPlayer ? "#0000cc" : "#e63946";
   }
   for (var i = 0; i < cells.length; i++) {
     cells[i].removeEventListener("click", turnClick, false);
   }
   setTimeout( function() {
     declareWinner(gameWon.player == huPlayer ? "You win!" : "You lose!") 
-  }, 2000);
+  }, 800);
 
 }
 
@@ -108,12 +111,11 @@ function bestSpot() {
 function checkTie() {
   if (emptySquares().length == 0) {
     for (var i = 0; i < cells.length; i++) {
-      cells[i].style.backgroundColor = "green";
       cells[i].removeEventListener("click", turnClick, false);
     }
     setTimeout(function() {
       declareWinner("Tie Game!")
-    }, 1000);
+    }, 800);
     return true;
   }
   return false;
@@ -124,7 +126,8 @@ function declareWinner(who) {
   document.querySelector(".endgame").style.display = "block";
   document.querySelector(".endgame .text").innerHTML = who;
   document.getElementById('endContainer').className += ' fade-in'; 
-
+  checkOBtn.disabled = true;
+  checkXBtn.disabled = true;
   checkXBtn.checked = true;
   huPlayer = "X";
   aiPlayer = "O";
